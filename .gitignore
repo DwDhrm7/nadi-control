@@ -10,8 +10,25 @@
 !.yarn/releases
 !.yarn/versions
 
-# testing
+# testing & audit reports
 /coverage
+/tests
+/tests/
+testing.md
+
+# credentials & environment secrets
+.env
+.env.*
+.env*.local
+*.env
+*.pem
+*.key
+*.p12
+*.pfx
+credentials/
+secrets/
+*.secret
+*.keystore
 
 # next.js
 /.next/
@@ -20,18 +37,21 @@
 # production
 /build
 
-# misc
+# misc & OS
 .DS_Store
-*.pem
+Thumbs.db
 
-# debug
+# IDE & AI tools
+.claude/
+.idea/
+.vscode/
+.antigravity/
+
+# debug logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
-
-# env files (can opt-in for committing if needed)
-.env*
 
 # vercel
 .vercel
