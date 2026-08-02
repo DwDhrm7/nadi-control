@@ -1,7 +1,25 @@
 {
   "permissions": {
     "allow": [
-      "WebFetch(domain:embed.figma.com)"
+      "WebFetch(domain:embed.figma.com)",
+      "Bash(npm run *)",
+      "Bash(lsof -ti:3000 -sTCP:LISTEN)",
+      "Bash(xargs -r kill)",
+      "Bash(disown)",
+      "Bash(timeout 40 bash -c 'until curl -sf http://localhost:3000 >/dev/null; do sleep 1; done')",
+      "Bash(command -v chromium-cli)",
+      "Read(//usr/local/bin/**)",
+      "Bash(npx --yes chromium-cli --help)",
+      "Bash(node -e \"require\\('playwright'\\)\")",
+      "Bash(npm ls *)",
+      "Bash(npm init *)",
+      "Bash(npm install *)",
+      "Read(//Users/idewamadedharmaputrasantika/Library/Caches/ms-playwright/**)",
+      "Bash(find ~/Library/Caches/ms-playwright/chromium-1223 -name \"Chromium.app\" -o -name \"chrome\" 2>/dev/null | head -5)",
+      "Read(//Users/idewamadedharmaputrasantika/Library/Caches/ms-playwright/chromium-1223/**)",
+      "Bash(find ~/Library/Caches/ms-playwright/chromium-1223 -maxdepth 4 2>/dev/null)",
+      "Bash(mkdir -p shots)",
+      "Bash(node verify.mjs)"
     ]
   }
 }

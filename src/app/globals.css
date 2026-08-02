@@ -1,26 +1,110 @@
 @import "tailwindcss";
+@import "leaflet/dist/leaflet.css";
+
+@custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-bg: #f1f5f9;
+  --color-surface: #ffffff;
+  --color-border: #e2e8f0;
+  --color-text: #0f172a;
+  --color-text-muted: #64748b;
+
+  --color-navy: #15304c;
+  --color-navy-active: #2f6690;
+  --color-navy-border: #24486a;
+
+  --color-primary: #1d6fc4;
+  --color-primary-dark: #14548f;
+  --color-primary-light: #eaf3fc;
+
+  --color-confirm: #0d6e5d;
+  --color-confirm-dark: #0a5749;
+
+  --color-success: #059669;
+  --color-success-bg: #e3f6ee;
+  --color-danger: #dc2626;
+  --color-danger-bg: #fce8e8;
+  --color-warning: #d97706;
+  --color-warning-bg: #fef3e2;
+}
+
+.dark {
+  --color-bg: #0b1524;
+  --color-surface: #101c30;
+  --color-border: #223349;
+  --color-text: #e7edf5;
+  --color-text-muted: #93a4bb;
+
+  --color-navy: #0a1728;
+  --color-navy-active: #2f6690;
+  --color-navy-border: #1a2c42;
+
+  --color-primary: #4a93de;
+  --color-primary-dark: #6fa9e6;
+  --color-primary-light: #16283d;
+
+  --color-confirm: #12876f;
+  --color-confirm-dark: #14a186;
+
+  --color-success: #34d399;
+  --color-success-bg: #0f2a22;
+  --color-danger: #f87171;
+  --color-danger-bg: #351515;
+  --color-warning: #fbbf24;
+  --color-warning-bg: #3a2a0d;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --font-sans: var(--font-inter);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-bg: var(--color-bg);
+  --color-surface: var(--color-surface);
+  --color-border: var(--color-border);
+  --color-text: var(--color-text);
+  --color-text-muted: var(--color-text-muted);
+
+  --color-navy: var(--color-navy);
+  --color-navy-active: var(--color-navy-active);
+  --color-navy-border: var(--color-navy-border);
+
+  --color-primary: var(--color-primary);
+  --color-primary-dark: var(--color-primary-dark);
+  --color-primary-light: var(--color-primary-light);
+
+  --color-confirm: var(--color-confirm);
+  --color-confirm-dark: var(--color-confirm-dark);
+
+  --color-success: var(--color-success);
+  --color-success-bg: var(--color-success-bg);
+  --color-danger: var(--color-danger);
+  --color-danger-bg: var(--color-danger-bg);
+  --color-warning: var(--color-warning);
+  --color-warning-bg: var(--color-warning-bg);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+* {
+  border-color: var(--color-border);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--color-text-muted) 40%, transparent);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.leaflet-container {
+  font-family: var(--font-sans);
+  background: var(--color-bg);
 }
