@@ -12,6 +12,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { useTranslation } from "@/lib/i18n/language-provider";
+import { NadiLogo } from "@/components/ui/NadiLogo";
 
 const NAV_ITEMS = [
   { href: "/", key: "nav.pemantauan", icon: Activity },
@@ -28,20 +29,8 @@ export function Sidebar() {
 
   return (
     <aside className="flex h-full w-70 shrink-0 flex-col bg-navy px-4 py-6">
-      <div className="mb-8 flex items-center gap-3 px-2">
-        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary">
-          <Activity size={22} className="text-white" />
-        </div>
-        <div>
-          <p className="text-[17px] font-bold leading-tight text-white">
-            NADI
-            <br />
-            Control
-          </p>
-          <p className="mt-1 text-[11px] font-medium tracking-wide text-white/50">
-            {t("common.cityIntelligence")}
-          </p>
-        </div>
+      <div className="mb-8 px-2">
+        <NadiLogo variant="sidebar" />
       </div>
 
       <nav className="flex flex-1 flex-col gap-1">

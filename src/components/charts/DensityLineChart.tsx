@@ -25,6 +25,7 @@ export function DensityLineChart({
         <XAxis dataKey="period" tickLine={false} axisLine={false} tick={{ fill: "var(--color-text-muted)", fontSize: 11 }} />
         <YAxis tickLine={false} axisLine={false} tick={{ fill: "var(--color-text-muted)", fontSize: 11 }} />
         <Tooltip
+          /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
           formatter={(value: any, name: any) => [
             value,
             name === "sebelum" || name === labels.sebelum

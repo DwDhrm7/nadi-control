@@ -1,13 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   Bell,
   Briefcase,
   ChevronRight,
   Headset,
   KeyRound,
-  LayoutGrid,
   LogOut,
   Moon,
   ShieldCheck,
@@ -18,7 +17,6 @@ import {
 import { TopbarShell, PageTitle } from "@/components/layout/TopbarShell";
 import { NotificationBell } from "@/components/layout/NotificationBell";
 import { UserMenu } from "@/components/layout/UserMenu";
-import { SearchInput } from "@/components/ui/SearchInput";
 import { Card, CardHeader } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
@@ -30,6 +28,7 @@ import { useAuth } from "@/lib/auth-provider";
 import { useToast } from "@/lib/toast-provider";
 import { useTranslation } from "@/lib/i18n/language-provider";
 import type { Language } from "@/lib/i18n/dictionary";
+import { NadiLogo } from "@/components/ui/NadiLogo";
 
 const STORAGE_KEY = "nadi-settings";
 
@@ -44,21 +43,19 @@ const DEFAULT_SETTINGS: Settings = {
   densityThreshold: 75,
   twoFactor: true,
 };
-
 export default function PengaturanPage() {
   const { theme, setTheme } = useTheme();
   const { logout } = useAuth();
   const toast = useToast();
   const { language, setLanguage, t } = useTranslation();
-  const [globalSearch, setGlobalSearch] = useState("");
-  const [settings, setSettings] = useState<Settings>(DEFAULT_SETTINGS);
+  const [settings, setSettings] = useState<Settings>(() => {
+    if (typeof window === "undefined") return DEFAULT_SETTINGS;
+    const stored = window.localStorage.getItem(STORAGE_KEY);
+    return stored ? JSON.parse(stored) : DEFAULT_SETTINGS;
+  });
   const [logoutOpen, setLogoutOpen] = useState(false);
   const [passwordOpen, setPasswordOpen] = useState(false);
-
-  useEffect(() => {
-    const stored = window.localStorage.getItem(STORAGE_KEY);
-    if (stored) setSettings(JSON.parse(stored));
-  }, []);
+  const [aboutOpen, setAboutOpen] = useState(false);
 
   function update(next: Partial<Settings>) {
     const merged = { ...settings, ...next };
@@ -115,7 +112,10 @@ export default function PengaturanPage() {
               {t("pengaturan.contactIt")}
               <ChevronRight size={15} className="text-text-muted" />
             </button>
-            <button className="flex w-full items-center justify-between border-t border-border px-5 py-3.5 text-sm text-text hover:bg-bg cursor-pointer">
+            <button
+              onClick={() => setAboutOpen(true)}
+              className="flex w-full items-center justify-between border-t border-border px-5 py-3.5 text-sm text-text hover:bg-bg cursor-pointer"
+            >
               {t("pengaturan.aboutNadi")}
               <span className="text-text-muted">v2.4.0</span>
             </button>
@@ -261,7 +261,29 @@ export default function PengaturanPage() {
       </Modal>
 
       <PasswordModal open={passwordOpen} onClose={() => setPasswordOpen(false)} onSaved={() => toast("success", t("pengaturan.passwordUpdated"))} />
+      <AboutModal open={aboutOpen} onClose={() => setAboutOpen(false)} />
     </>
+  );
+}
+
+function AboutModal({ open, onClose }: { open: boolean; onClose: () => void }) {
+  const { t } = useTranslation();
+  return (
+    <Modal open={open} onClose={onClose} title={t("pengaturan.aboutNadi")} width="max-w-md">
+      <div className="py-2">
+        <NadiLogo variant="full" />
+        <div className="mt-6 rounded-xl border border-border bg-bg/50 p-4 text-center text-xs text-text-muted">
+          <p className="font-semibold text-text">NADI Control Center Operator v2.4.0</p>
+          <p className="mt-1">Sistem Navigasi Adaptif dan Distribusi Intelijen Kota</p>
+          <p className="mt-2 text-[11px] opacity-75">© 2026 NADI Intelligence System. All rights reserved.</p>
+        </div>
+      </div>
+      <div className="mt-4 flex justify-end">
+        <Button variant="outline" onClick={onClose}>
+          {t("common.close") || "Tutup"}
+        </Button>
+      </div>
+    </Modal>
   );
 }
 

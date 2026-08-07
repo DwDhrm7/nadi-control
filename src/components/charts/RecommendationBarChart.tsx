@@ -31,6 +31,7 @@ export function RecommendationBarChart({
         <YAxis tickLine={false} axisLine={false} tick={{ fill: "var(--color-text-muted)", fontSize: 12 }} />
         <Tooltip
           cursor={{ fill: "var(--color-bg)" }}
+          /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
           formatter={(value: any, name: any) => [
             value,
             name === "diberikan" || name === labels.diberikan

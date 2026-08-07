@@ -2,13 +2,11 @@ import { cn } from "@/lib/utils";
 
 export function DonutProgress({
   value,
-  target,
   size = 88,
   stroke = 8,
   tone = "primary",
 }: {
   value: number;
-  target?: number;
   size?: number;
   stroke?: number;
   tone?: "primary" | "success" | "danger" | "warning";
