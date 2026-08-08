@@ -11,6 +11,7 @@ export interface Incident {
   detectedObjects: number;
   speedEstimate: string;
   image: string;
+  video?: string;
   timeline: { time: string; active: boolean }[];
   note?: string;
 }
@@ -27,6 +28,7 @@ export const INCIDENTS: Incident[] = [
     detectedObjects: 42,
     speedEstimate: "12 km/jam",
     image: "/images/incidents/inc-1.png",
+    video: "/videos/ramai.mp4",
     timeline: [
       { time: "14:29", active: false },
       { time: "14:30", active: false },
@@ -45,6 +47,7 @@ export const INCIDENTS: Incident[] = [
     detectedObjects: 18,
     speedEstimate: "4 km/jam",
     image: "/images/incidents/inc-2.png",
+    video: "/videos/kecelakaan.mp4",
     timeline: [
       { time: "14:27", active: false },
       { time: "14:28", active: false },
@@ -63,6 +66,7 @@ export const INCIDENTS: Incident[] = [
     detectedObjects: 65,
     speedEstimate: "6 km/jam",
     image: "/images/incidents/inc-3.png",
+    video: "/videos/macet.mp4",
     timeline: [
       { time: "14:25", active: false },
       { time: "14:26", active: false },
@@ -85,6 +89,7 @@ export const INCIDENTS_PREDICTED: Incident[] = [
     speedEstimate: "9 km/jam",
     image:
       "https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=800&q=60",
+    video: "/videos/sepi.mp4",
     timeline: [
       { time: "+40m", active: false },
       { time: "+50m", active: false },
@@ -103,6 +108,7 @@ export const INCIDENTS_PREDICTED: Incident[] = [
     detectedObjects: 54,
     speedEstimate: "3 km/jam",
     image: "/images/incidents/inc-1.png",
+    video: "/videos/sepi.mp4",
     timeline: [
       { time: "+1j 30m", active: false },
       { time: "+1j 40m", active: false },

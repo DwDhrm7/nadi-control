@@ -15,6 +15,10 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "NADI Control Center",
   description: "City Intelligence — pemantauan, verifikasi, dan kendali kota real-time.",
+  icons: {
+    icon: "/logo-icon.svg",
+    apple: "/logo-icon.svg",
+  },
 };
 
 const THEME_SCRIPT = `
@@ -35,6 +39,7 @@ export default function RootLayout({
   return (
     <html lang="id" className={`${inter.variable} h-full`} suppressHydrationWarning>
       <head>
+        <link rel="icon" href="/logo-icon.svg" type="image/svg+xml" />
         <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
       </head>
       <body className="h-full font-sans antialiased">

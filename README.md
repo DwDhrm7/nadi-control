@@ -17,9 +17,9 @@
 - **Aliran Kejadian (Event Stream)**: Log kejadian real-time yang memuat skor keyakinan AI, indikator prediksi 1-3 jam, serta pengalihan otomatis ke riwayat kejadian.
 - **Statistik Utama**: Metrik ringkas zona padat aktif, antrean insiden, rekomendasi aktif, dan kepatuhan wisatawan.
 
-### 2. 🛡️ Verifikasi Insiden (Incident Verification)
-- **Antrean Verifikasi Kamera CCTV**: Pemantauan visual berbasis simulasi kamera CCTV resolusi tinggi (Kerumunan Braga, Kecelakaan Asia Afrika, Jalan Pasteur Lengang).
-- **Deteksi AI & Bounding Box**: Tampilan visual area deteksi AI beserta persentase skor keyakinan (*confidence score*).
+### 2. 🛡️ Verifikasi Insiden (Incident Verification & Live Video YOLO Tracking)
+- **Live Feed CCTV & Deteksi YOLOv8**: Pemutaran video mentah klip CCTV (`.mp4`) real-time yang dilengkapi dengan hamparan (*overlay layer*) deteksi **YOLOv8** otomatis.
+- **Bounding Box & Object Tracking**: Visualisasi area objek (kendaraan/kerumunan), skor keyakinan (*confidence score*), estimasi kecepatan, serta pencacah objek terdeteksi (*tracked bounding box sample*) yang berjalan tersinkronisasi dengan video.
 - **Manajemen Keputusan Operator**: Tindakan konfirmasi insiden, penolakan insiden false-positive, atau penandaan *Perlu Tinjauan* beserta catatan analisis terintegrasi.
 
 ### 3. 🗺️ Distribusi Wisata (Tourism Distribution)
@@ -62,23 +62,24 @@ Aplikasi dibangun dengan standar antarmuka modern, elegan, dan fungsional:
 
 ```text
 nadi-control/
-├── public/                  # Asset publik (Gambar CCTV insiden, SVG icons)
-│   └── images/incidents/    # Gambar CCTV hasil generasi (inc-1, inc-2, inc-3)
+├── public/                  # Asset publik (Video CCTV insiden, SVG logo, favicon)
+│   ├── images/incidents/    # Gambar CCTV fallback (inc-1, inc-2, inc-3)
+│   └── videos/              # Video mentah CCTV (.mp4) & JSON track data YOLOv8
 ├── src/
 │   ├── app/                 # Next.js App Router Pages
 │   │   ├── distribusi-wisata/  # Halaman Distribusi Wisata
 │   │   ├── evaluasi-kebijakan/ # Halaman Evaluasi Kebijakan
 │   │   ├── kendali-perangkat/  # Halaman Kendali Perangkat VMS & Sinyal
 │   │   ├── pengaturan/         # Halaman Pengaturan Sistem
-│   │   ├── verifikasi-insiden/ # Halaman Verifikasi CCTV Insiden
+│   │   ├── verifikasi-insiden/ # Halaman Verifikasi CCTV Insiden & YOLO Player
 │   │   ├── globals.css         # Variabel tema CSS & utility classes
 │   │   ├── layout.tsx          # Root Layout & Provider Wrapper
-│   │   └── page.tsx            # Halaman Utam Pemantauan Langsung
+│   │   └── page.tsx            # Halaman Utama Pemantauan Langsung
 │   ├── components/          # Komponen React Reusable
 │   │   ├── charts/          # DensityLineChart & RecommendationBarChart
 │   │   ├── layout/          # Sidebar, TopbarShell, UserMenu, NotificationBell
 │   │   ├── map/             # ZoneMap (Leaflet integration)
-│   │   └── ui/              # Button, Card, Badge, Modal, SearchInput, StatCard
+│   │   └── ui/              # Button, Card, Badge, Modal, NadiLogo, StatCard
 │   ├── lib/                 # Utility & Provider State
 │   │   ├── data/            # Mock dataset (monitoring, incidents, tourism, policy)
 │   │   ├── i18n/            # Kamus Bahasa (dictionary.ts) & LanguageProvider

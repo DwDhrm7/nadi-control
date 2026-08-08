@@ -2,20 +2,25 @@
 
 import { useEffect, useState } from "react";
 
+function formatTime() {
+  return new Date().toLocaleTimeString("id-ID", {
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: false,
+  });
+}
+
 export function LiveClock() {
   const [time, setTime] = useState<string | null>(null);
 
   useEffect(() => {
-    const format = () =>
-      new Date().toLocaleTimeString("id-ID", {
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
-        hour12: false,
-      });
-    setTime(format());
-    const id = setInterval(() => setTime(format()), 1000);
-    return () => clearInterval(id);
+    const timer = setTimeout(() => setTime(formatTime()), 0);
+    const id = setInterval(() => setTime(formatTime()), 1000);
+    return () => {
+      clearTimeout(timer);
+      clearInterval(id);
+    };
   }, []);
 
   return (
